@@ -16,5 +16,17 @@
   "bugs": {
     "url": "https://github.com/lukasGuzys/NodeJS_exam/issues"
   },
-  "homepage": "https://github.com/lukasGuzys/NodeJS_exam#readme"
+  "homepage": "https://github.com/lukasGuzys/NodeJS_exam#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  }
 }
