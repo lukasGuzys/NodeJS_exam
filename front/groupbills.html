@@ -34,5 +34,61 @@
         </form>
     </div>
 </div>
+
+<script>
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+    location.replace("http://localhost:8080");
+    }
+
+    const container = document.getElementById("container")
+    const table = document.getElementById("groupBills")
+    fetch("http://localhost:8080",{
+        headers:{
+            authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+    }).then(res => res.json()
+        .then(data => {
+            data.forEach(element => {
+                const tr = document.createElement("tr")
+                const thId = document.createElement("td")
+                const thDescription = document.createElement("td")
+                const thAmount = document.createElement("td")
+
+                thId.textContent = element.id
+                thAmount.textContent = element.description
+                thDescription.textContent = `$${element.amount}`
+
+                container.append(table)
+                table.append(tr)
+                tr.append(thId,thDescription,thAmount)
+                
+            
+
+            });
+        })
+        .catch(err => {
+            console.log(err)}))
+
+    
+    document.forms[0].addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const description = e.target.elements.description.value;
+    const amount = e.target.elements.amount.value;
+    alert(`Successfuly added: ${description}`)
+    fetch("http://localhost:8080", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({description,amount}),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  });
+</script>
 </body>
 </html>

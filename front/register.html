@@ -18,5 +18,33 @@
         <section><a id="register-page" href="/">Or Login Here</a> </section>
     </form>
 
+    <script>
+        document.forms[0].addEventListener("submit", (e) => {
+            e.preventDefault()
+            fetch("http://localhost:8080", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: e.target.elements[0].value,
+                    password: e.target.elements[1].value,
+                    password: e.target.elements[2].value
+
+
+                })
+            }).then(res => res.json())
+              .then((data) => {
+                  if(data.err){
+                      return alert("Incorrect data provided")
+                  }
+                  localStorage.setItem("token", data.token);
+                  alert("successfuly registered")
+                  location.replace("/")
+                  
+              })
+              .catch(err => console.log(err))
+        })
+    </script>
 </body>
 </html>
